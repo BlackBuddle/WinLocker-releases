@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WinLocker | 폰으로 잠그고 푸는 Windows 잠금 화면</title>
+<meta name="description" content="공유 시설에 둔 개인 PC를 자체 잠금 화면으로 덮고, 폰에서 원격으로 잠그고 푸는 Windows 잠금 프로그램입니다.">
+<meta name="theme-color" content="#17130f">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="WinLocker">
+<meta property="og:description" content="공유 시설에 둔 내 PC를 폰으로 잠그고 풉니다.">
+<meta property="og:url" content="https://blackbuddle.github.io/WinLocker-releases/">
+<meta property="og:image" content="https://blackbuddle.github.io/WinLocker-releases/assets/hero.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="assets/icon-192.png">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<script src="assets/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+
+<!-- 여러 장면에서 함께 쓰는 아이콘. 자물쇠는 앱 잠금 화면의 선 아이콘과 같은 모양이다. -->
+<svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
+  <symbol id="i-pad" viewBox="0 0 36 36">
+    <rect x="8" y="16" width="20" height="14" rx="4" fill="none" stroke="currentColor" stroke-width="2.5"/>
+    <path d="M12 16 V11.5 A6 6 0 0 1 24 11.5 V16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="i-slash" viewBox="0 0 16 16">
+    <circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M3.9 12.1 L12.1 3.9" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+  <symbol id="i-check" viewBox="0 0 20 20">
+    <path d="M4.5 10.5 L8.3 14.2 L15.5 6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24">
+    <rect x="6" y="2.5" width="12" height="19" rx="2.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M10.4 18.4 H13.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+<header class="top wrap">
+  <a class="brand" href="./">
+    <img src="assets/icon-192.png" alt="" width="30" height="30">
+    <span>WinLocker</span>
+  </a>
+  <nav class="top-nav" aria-label="페이지 안 이동">
+    <a href="#features">기능</a>
+    <a href="#screens">화면</a>
+    <a href="#install">설치</a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <!-- 첫 화면: 한 줄 소개, 내려받기, 대표 모션(폰 버튼으로 두 모니터를 잠그고 푸는 장면) -->
+  <section class="hero wrap" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <h1 id="hero-title">공유 시설에 둔 내 PC를<br>폰으로 잠그고 풉니다</h1>
+      <div class="hero-side">
+        <p class="lead">WinLocker는 자체 잠금 화면으로 모든 모니터를 덮고, 재부팅해도 곧바로 다시 잠그는 Windows 잠금 프로그램입니다.</p>
+        <div class="cta">
+          <a class="btn" href="https://github.com/BlackBuddle/WinLocker-releases/releases/latest/download/WinLocker-win-x64.zip">
+            <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M10 3.5 V12.5 M6.2 8.9 L10 12.7 L13.8 8.9 M4 15.8 H16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            최신 버전 내려받기
+          </a>
+          <a class="text-link" href="https://github.com/BlackBuddle/WinLocker-releases/releases">모든 릴리스</a>
+        </div>
+        <p class="cta-note">WinLocker-win-x64.zip, Windows 10/11 x64용</p>
+      </div>
+    </div>
+
+    <figure class="hero-scene" id="hero-demo">
+      <div class="rig">
+        <div class="phone">
+          <div class="ph-screen">
+            <span class="ph-name" aria-hidden="true">내 PC</span>
+            <button class="ph-btn" type="button" aria-label="데모 PC 잠금 풀기">
+              <svg viewBox="0 0 36 36" aria-hidden="true" focusable="false"><use href="#i-pad"/></svg>
+              <span class="ph-label">풀기</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="wire" aria-hidden="true"><span class="run"><i class="pulse"></i></span></div>
+
+        <div class="mons" aria-hidden="true">
+          <div class="mon is-locked">
+            <div class="mon-frame"><div class="mon-screen">
+              <div class="desk"><i class="w w1"></i><i class="w w2"></i><i class="bar"></i></div>
+              <div class="lock">
+                <p class="lk-word">WinLock</p>
+                <div class="lk-card">
+                  <svg class="lk-pad" viewBox="0 0 36 36"><use href="#i-pad"/></svg>
+                  <p class="lk-text">잠금됨 — 비밀번호를 입력하고 Enter</p>
+                  <p class="lk-dots"><i></i><i></i><i></i><i></i><i></i><i></i></p>
+                </div>
+                <p class="lk-foot"><span><i class="dot"></i>Wi-Fi: Home-WiFi</span><span><i class="dot"></i>원격 제어: 정상</span></p>
+                <p class="lk-acts"><span>비밀번호 재설정</span><span>네트워크 설정</span></p>
+              </div>
+            </div></div>
+            <span class="mon-stand"></span>
+          </div>
+          <div class="mon is-locked">
+            <div class="mon-frame"><div class="mon-screen">
+              <div class="desk"><i class="w w1"></i><i class="bar"></i></div>
+              <div class="lock"><p class="lk-word is-big">WinLock</p></div>
+            </div></div>
+            <span class="mon-stand"></span>
+          </div>
+        </div>
+      </div>
+      <p class="vh hero-live" aria-live="polite"></p>
+      <figcaption class="hero-cap"><span class="js-only">그림 속 폰의 버튼을 눌러 보세요. </span>폰에서 누르면 PC의 모든 모니터가 잠기고, 다시 누르면 풀립니다.</figcaption>
+    </figure>
+  </section>
+
+  <!-- 원격 잠금·해제가 어떤 길로 전달되는지 -->
+  <section class="block wrap" id="features" aria-labelledby="relay-title">
+    <header class="block-head">
+      <svg class="bh-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg>
+      <h2 id="relay-title">폰에서 잠그고 풉니다</h2>
+      <p>폰 앱의 요청은 PC에서 도는 Remote Host가 먼저 인증합니다. WinLocker는 인증된 요청만 같은 PC 안의 로컬 통로로 받습니다.</p>
+    </header>
+
+    <div class="scene scene-relay" data-scene="relay" aria-hidden="true">
+      <div class="node node-phone">
+        <svg class="n-ico" viewBox="0 0 24 24"><use href="#i-phone"/></svg>
+        <span><b>폰 앱</b><small>잠그기·풀기</small></span>
+      </div>
+      <div class="link link-net">
+        <span class="link-label">Google 로그인 + 암호화 연결</span>
+        <div class="wire"><span class="run"><i class="pulse"></i></span></div>
+      </div>
+      <div class="pcbox">
+        <span class="pcbox-label">같은 PC 안</span>
+        <div class="node node-host">
+          <svg class="n-ico" viewBox="0 0 24 24"><path d="M12 2.8 L19 5.6 V11.2 C19 15.6 16 19.2 12 21 C8 19.2 5 15.6 5 11.2 V5.6 Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8.8 11.8 L11.1 14.1 L15.3 9.9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span><b>Remote Host</b><small>요청 인증</small></span>
+        </div>
+        <div class="link link-local">
+          <span class="link-label">로컬 통로</span>
+          <div class="wire"><span class="run"><i class="chip chip-lock">LOCK</i><i class="chip chip-unlock">UNLOCK</i></span></div>
+        </div>
+        <div class="node node-wl">
+          <img src="assets/icon-192.png" alt="" width="28" height="28">
+          <span><b>WinLocker</b><small>잠금 화면</small></span>
+          <div class="mon mon-mini is-locked">
+            <div class="mon-frame"><div class="mon-screen">
+              <div class="desk"><i class="w w1"></i><i class="bar"></i></div>
+              <div class="lock"><div class="lk-card"><svg class="lk-pad" viewBox="0 0 36 36"><use href="#i-pad"/></svg><p class="lk-dots"><i></i><i></i><i></i><i></i></p></div></div>
+            </div></div>
+            <span class="mon-stand"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 잠긴 동안의 기능 -->
+  <section class="block wrap" aria-labelledby="locked-title">
+    <header class="block-head">
+      <svg class="bh-icon" viewBox="0 0 36 36" aria-hidden="true" focusable="false"><use href="#i-pad"/></svg>
+      <h2 id="locked-title">잠겨 있는 동안</h2>
+      <p>재부팅해도 자동 로그온 뒤 스스로 떠서 곧바로 잠급니다.</p>
+    </header>
+
+    <div class="block-body">
+
+      <article class="feature" aria-labelledby="f-monitors">
+        <div class="f-text">
+          <h3 id="f-monitors">모든 모니터를 덮습니다</h3>
+          <p>연결된 모니터를 모두 잠금 화면으로 덮습니다. 잠긴 동안 모니터를 꽂거나 빼도 1초 안팎에 다시 덮습니다.</p>
+        </div>
+        <div class="scene scene-mons" data-scene="monitors" aria-hidden="true">
+          <div class="mon is-locked">
+            <div class="mon-frame"><div class="mon-screen">
+              <div class="desk"><i class="w w1"></i><i class="w w2"></i><i class="bar"></i></div>
+              <div class="lock">
+                <p class="lk-word">WinLock</p>
+                <div class="lk-card">
+                  <svg class="lk-pad" viewBox="0 0 36 36"><use href="#i-pad"/></svg>
+                  <p class="lk-text">잠금됨 — 비밀번호를 입력하고 Enter</p>
+                  <p class="lk-dots"><i></i><i></i><i></i><i></i></p>
+                </div>
+                <p class="lk-foot"><span><i class="dot"></i>Wi-Fi: Home-WiFi</span><span><i class="dot"></i>원격 제어: 정상</span></p>
+              </div>
+            </div></div>
+            <span class="mon-stand"></span>
+          </div>
+          <div class="mon is-locked">
+            <div class="mon-frame"><div class="mon-screen">
+              <div class="desk"><i class="w w2"></i><i class="bar"></i></div>
+              <div class="lock"><p class="lk-word is-big">WinLock</p></div>
+            </div></div>
+            <span class="mon-stand"></span>
+          </div>
+          <div class="mon mon-new is-locked">
+            <div class="mon-frame"><div class="mon-screen">
+              <div class="desk"><i class="w w1"></i><i class="bar"></i></div>
+              <div class="lock"><p class="lk-word is-big">WinLock</p></div>
+            </div></div>
+            <span class="mon-stand"></span>
+            <p class="hotplug is-shown is-full"><span class="hp-bar"><i></i></span><span class="hp-text">새 모니터, 1초 안팎</span></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="feature f-side" aria-labelledby="f-keys">
+        <div class="f-text">
+          <h3 id="f-keys">창 전환 단축키를 막습니다</h3>
+          <p>Win, Alt+Tab, Ctrl+Alt+Tab, Alt+Esc, Ctrl+Esc, Alt+F4를 막고, 비밀번호 입력은 그대로 받습니다.</p>
+        </div>
+        <div class="scene scene-keys" data-scene="keys" aria-hidden="true">
+          <ul class="combos">
+            <li class="combo is-blocked"><span class="keys"><span class="kc">Win</span></span><em class="tag"><svg viewBox="0 0 16 16"><use href="#i-slash"/></svg>막힘</em></li>
+            <li class="combo is-blocked"><span class="keys"><span class="kc">Alt</span><span class="plus">+</span><span class="kc">Tab</span></span><em class="tag"><svg viewBox="0 0 16 16"><use href="#i-slash"/></svg>막힘</em></li>
+            <li class="combo is-blocked"><span class="keys"><span class="kc">Ctrl</span><span class="plus">+</span><span class="kc">Alt</span><span class="plus">+</span><span class="kc">Tab</span></span><em class="tag"><svg viewBox="0 0 16 16"><use href="#i-slash"/></svg>막힘</em></li>
+            <li class="combo is-blocked"><span class="keys"><span class="kc">Alt</span><span class="plus">+</span><span class="kc">Esc</span></span><em class="tag"><svg viewBox="0 0 16 16"><use href="#i-slash"/></svg>막힘</em></li>
+            <li class="combo is-blocked"><span class="keys"><span class="kc">Ctrl</span><span class="plus">+</span><span class="kc">Esc</span></span><em class="tag"><svg viewBox="0 0 16 16"><use href="#i-slash"/></svg>막힘</em></li>
+            <li class="combo is-blocked"><span class="keys"><span class="kc">Alt</span><span class="plus">+</span><span class="kc">F4</span></span><em class="tag"><svg viewBox="0 0 16 16"><use href="#i-slash"/></svg>막힘</em></li>
+          </ul>
+          <div class="pw">
+            <div class="lk-card is-solo">
+              <svg class="lk-pad" viewBox="0 0 36 36"><use href="#i-pad"/></svg>
+              <p class="lk-text">잠금됨 — 비밀번호를 입력하고 Enter</p>
+              <p class="lk-dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></p>
+            </div>
+            <p class="pw-note is-on"><svg viewBox="0 0 20 20"><use href="#i-check"/></svg>비밀번호는 그대로 입력됩니다</p>
+          </div>
+        </div>
+      </article>
+
+      <div class="pair">
+        <article class="feature" aria-labelledby="f-apps">
+          <div class="f-text">
+            <h3 id="f-apps">작업 관리자와 USB 저장장치를 막습니다</h3>
+            <p>잠긴 동안에는 작업 관리자를 열 수 없고, USB 저장장치도 막힙니다.</p>
+          </div>
+          <div class="scene scene-apps" data-scene="apps" aria-hidden="true">
+            <div class="app is-locked">
+              <span class="app-ico">
+                <svg class="ico" viewBox="0 0 48 48"><rect x="5" y="8" width="38" height="32" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5 15 H43" stroke="currentColor" stroke-width="2"/><path d="M10 33 L16 27 L21 30 L27 21 L32 26 L38 19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="badge"><svg viewBox="0 0 36 36"><rect x="8" y="16" width="20" height="14" rx="4" fill="none" stroke="currentColor" stroke-width="2.6"/><path class="shackle" d="M12 16 V11.5 A6 6 0 0 1 24 11.5 V16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></span>
+              </span>
+              <span class="app-name">작업 관리자</span>
+              <span class="app-state">막힘</span>
+            </div>
+            <div class="app is-locked">
+              <span class="app-ico">
+                <svg class="ico" viewBox="0 0 48 48"><rect x="16" y="17" width="16" height="25" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19 17 V7 H29 V17" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><rect x="21.2" y="10" width="2" height="3.4" fill="currentColor"/><rect x="24.8" y="10" width="2" height="3.4" fill="currentColor"/></svg>
+                <span class="badge"><svg viewBox="0 0 36 36"><rect x="8" y="16" width="20" height="14" rx="4" fill="none" stroke="currentColor" stroke-width="2.6"/><path class="shackle" d="M12 16 V11.5 A6 6 0 0 1 24 11.5 V16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></span>
+              </span>
+              <span class="app-name">USB 저장장치</span>
+              <span class="app-state">막힘</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="feature" aria-labelledby="f-check">
+          <div class="f-text">
+            <h3 id="f-check">30초마다 스스로 점검합니다</h3>
+            <p>잠긴 동안 30초마다 보호를 다시 적용합니다. 일부가 실패하면 잠금 화면 하단에 알리고, 다시 성공하면 지웁니다.</p>
+          </div>
+          <div class="scene scene-check has-fail" data-scene="check" aria-hidden="true">
+            <div class="ring is-full">
+              <svg viewBox="0 0 120 120"><circle class="ring-track" cx="60" cy="60" r="52"/><circle class="ring-prog" cx="60" cy="60" r="52"/></svg>
+              <span class="ring-label"><b>30</b>초</span>
+            </div>
+            <ul class="checks">
+              <li><i class="dot"></i>단축키 차단</li>
+              <li class="is-bad"><i class="dot"></i>작업 관리자·USB 차단</li>
+              <li><i class="dot"></i>모든 모니터 덮기</li>
+            </ul>
+            <div class="check-foot">
+              <span class="cf-label">잠금 화면 하단</span>
+              <p class="cf-strip"><span><i class="dot"></i>원격 제어: 정상</span><span class="fail"><i class="dot is-bad"></i>일부 보호 기능 적용 실패</span></p>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <article class="feature" aria-labelledby="f-unlock">
+        <div class="f-text">
+          <h3 id="f-unlock">세 가지 방법으로 풉니다</h3>
+          <p>원격이 안 될 때도 풀 수 있습니다.</p>
+        </div>
+        <div class="scene scene-ways" data-scene="ways">
+          <figure class="way is-done">
+            <div class="way-stage" aria-hidden="true">
+              <div class="phone phone-mini"><div class="ph-screen"><span class="ph-btn mini-btn">풀기</span></div></div>
+              <div class="wire is-green"><span class="run"><i class="pulse"></i></span></div>
+              <svg class="big-pad" viewBox="0 0 36 36"><rect x="8" y="16" width="20" height="14" rx="4" fill="none" stroke="currentColor" stroke-width="2.4"/><path class="shackle" d="M12 16 V11.5 A6 6 0 0 1 24 11.5 V16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+            </div>
+            <figcaption><b>폰에서 원격으로</b><span>폰 앱에서 풀기를 누릅니다.</span></figcaption>
+          </figure>
+          <figure class="way is-done">
+            <div class="way-stage" aria-hidden="true">
+              <div class="lk-card is-mini">
+                <svg class="lk-pad" viewBox="0 0 36 36"><rect x="8" y="16" width="20" height="14" rx="4" fill="none" stroke="currentColor" stroke-width="2.5"/><path class="shackle" d="M12 16 V11.5 A6 6 0 0 1 24 11.5 V16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+                <p class="lk-dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></p>
+              </div>
+              <span class="kc kc-enter">Enter</span>
+            </div>
+            <figcaption><b>로컬 비밀번호</b><span>잠금 화면에 비밀번호를 입력하고 Enter를 누릅니다.</span></figcaption>
+          </figure>
+          <figure class="way is-done">
+            <div class="way-stage" aria-hidden="true">
+              <div class="qr">
+                <svg viewBox="-1.5 -1.5 24 24"><rect x="-1.5" y="-1.5" width="24" height="24" rx="2.4" fill="#fff"/><path fill="#17130f" d="M0 0h7v1h-7zM10 0h2v1h-2zM14 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM11 1h1v1h-1zM14 1h1v1h-1zM20 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM12 2h1v1h-1zM14 2h1v1h-1zM16 2h3v1h-3zM20 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM8 3h1v1h-1zM10 3h1v1h-1zM12 3h1v1h-1zM14 3h1v1h-1zM16 3h3v1h-3zM20 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM8 4h2v1h-2zM14 4h1v1h-1zM16 4h3v1h-3zM20 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM9 5h3v1h-3zM14 5h1v1h-1zM20 5h1v1h-1zM0 6h7v1h-7zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h7v1h-7zM10 7h1v1h-1zM0 8h3v1h-3zM5 8h5v1h-5zM13 8h3v1h-3zM17 8h2v1h-2zM20 8h1v1h-1zM0 9h1v1h-1zM2 9h1v1h-1zM5 9h1v1h-1zM10 9h1v1h-1zM13 9h5v1h-5zM19 9h1v1h-1zM1 10h6v1h-6zM9 10h3v1h-3zM13 10h1v1h-1zM17 10h1v1h-1zM19 10h1v1h-1zM0 11h4v1h-4zM7 11h1v1h-1zM10 11h1v1h-1zM19 11h1v1h-1zM1 12h1v1h-1zM4 12h1v1h-1zM6 12h1v1h-1zM8 12h1v1h-1zM10 12h2v1h-2zM13 12h2v1h-2zM18 12h1v1h-1zM20 12h1v1h-1zM10 13h1v1h-1zM17 13h2v1h-2zM0 14h7v1h-7zM9 14h1v1h-1zM14 14h1v1h-1zM16 14h5v1h-5zM0 15h1v1h-1zM6 15h1v1h-1zM10 15h2v1h-2zM13 15h1v1h-1zM15 15h1v1h-1zM20 15h1v1h-1zM0 16h1v1h-1zM2 16h3v1h-3zM6 16h1v1h-1zM8 16h1v1h-1zM15 16h1v1h-1zM17 16h3v1h-3zM0 17h1v1h-1zM2 17h3v1h-3zM6 17h1v1h-1zM13 17h2v1h-2zM17 17h4v1h-4zM0 18h1v1h-1zM2 18h3v1h-3zM6 18h1v1h-1zM9 18h2v1h-2zM13 18h1v1h-1zM18 18h1v1h-1zM20 18h1v1h-1zM0 19h1v1h-1zM6 19h1v1h-1zM9 19h1v1h-1zM12 19h2v1h-2zM20 19h1v1h-1zM0 20h7v1h-7zM15 20h2v1h-2zM20 20h1v1h-1z"/></svg>
+                <i class="scan"></i>
+              </div>
+              <p class="gx-done"><svg viewBox="0 0 20 20"><use href="#i-check"/></svg>새 비밀번호 설정</p>
+            </div>
+            <figcaption><b>Google 재인증</b><span>비밀번호를 잊었으면 Google 계정으로 본인을 확인하고 새 비밀번호를 정합니다. 그 비밀번호로 풉니다.</span></figcaption>
+          </figure>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- 풀린 동안의 기능 -->
+  <section class="block block-open wrap" aria-labelledby="open-title">
+    <header class="block-head">
+      <svg class="bh-icon" viewBox="0 0 36 36" aria-hidden="true" focusable="false"><rect x="8" y="16" width="20" height="14" rx="4" fill="none" stroke="currentColor" stroke-width="2.5"/><path class="shackle" d="M12 16 V11.5 A6 6 0 0 1 24 11.5 V16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+      <h2 id="open-title">풀려 있는 동안</h2>
+      <p>트레이 아이콘으로 바로 다시 잠그고, 새 버전은 뒤에서 받아 둡니다.</p>
+    </header>
+
+    <div class="block-body">
+
+      <article class="feature f-side" aria-labelledby="f-tray">
+        <div class="f-text">
+          <h3 id="f-tray">트레이에서 바로 다룹니다</h3>
+          <p>해제 상태에서 트레이 아이콘을 우클릭하면 카드가 올라옵니다. 지금 잠그기, 네트워크 설정, 상태·진단, 종료를 여기서 씁니다.</p>
+        </div>
+        <div class="scene scene-tray" data-scene="tray" aria-hidden="true">
+          <div class="desk"><i class="w w1"></i><i class="w w2"></i></div>
+          <div class="tb">
+            <svg class="tb-ico" viewBox="0 0 16 16"><path d="M4 10 L8 6 L12 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg class="tb-ico" viewBox="0 0 16 16"><path d="M2.5 6.5 C5.6 3.6 10.4 3.6 13.5 6.5 M4.6 8.8 C6.6 7 9.4 7 11.4 8.8 M6.7 11 C7.5 10.3 8.5 10.3 9.3 11" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            <svg class="tb-ico" viewBox="0 0 16 16"><path d="M3 6.2 H5.4 L8.6 3.6 V12.4 L5.4 9.8 H3 Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M10.8 6 C11.7 7.1 11.7 8.9 10.8 10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            <img class="tb-wl" src="assets/icon-192.png" alt="" width="18" height="18">
+            <span class="tb-clock">14:05</span>
+          </div>
+          <div class="tcard is-open">
+            <p class="tc-title">WinLocker</p>
+            <p class="tc-status"><i class="dot"></i>실행 중</p>
+            <i class="tc-hr"></i>
+            <span class="tc-item tc-lock">지금 잠금하기</span>
+            <span class="tc-item">네트워크 설정 열기</span>
+            <span class="tc-item">상태·진단 보기</span>
+            <i class="tc-hr tc-hr2"></i>
+            <span class="tc-item tc-quit">종료</span>
+          </div>
+          <div class="tray-lock">
+            <p class="lk-word">WinLock</p>
+            <div class="lk-card is-mini"><svg class="lk-pad" viewBox="0 0 36 36"><use href="#i-pad"/></svg><p class="lk-caption">잠금됨</p></div>
+          </div>
+          <span class="cursor at-icon">
+            <i class="ring-click"></i>
+            <svg viewBox="0 0 18 24"><path d="M1.2 1.2 L1.2 19 L5.7 14.9 L8.8 21.7 L11.7 20.4 L8.7 13.7 L14.8 13.7 Z" fill="#f5f1ea" stroke="#17130f" stroke-width="1.2" stroke-linejoin="round"/></svg>
+            <em class="cur-tag">우클릭</em>
+          </span>
+        </div>
+      </article>
+
+      <article class="feature" aria-labelledby="f-update">
+        <div class="f-text">
+          <h3 id="f-update">자동으로 업데이트합니다</h3>
+          <p>잠금을 풀 때 새 릴리스를 확인해(최소 6시간 간격) 뒤에서 받아 둡니다. 다음에 잠글 때 교체하며, 교체하는 약 1초 동안은 화면이 잠기지 않습니다.</p>
+        </div>
+        <div class="scene scene-update is-got is-swept" data-scene="update" aria-hidden="true">
+          <div class="up-row">
+            <p class="up-when"><i class="dot"></i>잠금을 풀 때</p>
+            <div class="up-main">
+              <div class="up-track"><i class="up-fill"></i></div>
+              <p class="up-status"><span class="s-check">새 버전 확인</span><span class="s-get">새 버전 받는 중</span><span class="s-verify">해시와 파일 버전 확인</span><span class="s-done"><svg viewBox="0 0 20 20"><use href="#i-check"/></svg>받아 둠, 다음 잠금 때 적용</span></p>
+            </div>
+          </div>
+          <div class="up-row">
+            <p class="up-when"><svg viewBox="0 0 36 36"><use href="#i-pad"/></svg>다음에 잠글 때</p>
+            <div class="up-main">
+              <div class="band">
+                <span class="seg seg-a">잠금</span>
+                <span class="seg seg-gap">교체</span>
+                <span class="seg seg-b">새 버전으로 다시 잠김</span>
+                <span class="head-run"><i></i></span>
+              </div>
+              <p class="gap-note"><i class="swatch"></i>교체하는 동안 약 1초 잠기지 않습니다</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- 실제 화면 -->
+  <section class="block wrap" id="screens" aria-labelledby="screens-title">
+    <header class="block-head block-head-plain">
+      <h2 id="screens-title">실제 화면</h2>
+      <p>화면은 예시 데이터로 그린 것입니다.</p>
+    </header>
+    <div class="shots">
+      <figure class="shot shot-wide">
+        <a href="assets/lock-screen.png"><img src="assets/lock-screen.png" width="1920" height="1200" loading="lazy" decoding="async" alt="잠금 화면. 가운데 카드에 자물쇠, '잠금됨 — 비밀번호를 입력하고 Enter' 문구와 입력한 글자 수만큼의 점이 있고, 왼쪽 아래에 Wi-Fi와 원격 제어 상태, 오른쪽 아래에 비밀번호 재설정과 네트워크 설정 버튼이 있습니다."></a>
+        <figcaption>잠금 화면. 모든 모니터를 덮고, 하단에 Wi-Fi와 원격 제어 상태를 보여 줍니다.</figcaption>
+      </figure>
+      <figure class="shot">
+        <a href="assets/tray-card.png"><img src="assets/tray-card.png" width="960" height="1280" loading="lazy" decoding="async" alt="트레이 카드. WinLocker 실행 중 표시 아래에 지금 잠금하기, 네트워크 설정 열기, 상태·진단 보기, 종료 항목이 있습니다."></a>
+        <figcaption>트레이 카드. 해제 상태에서 트레이 아이콘을 우클릭합니다.</figcaption>
+      </figure>
+      <figure class="shot">
+        <a href="assets/diagnostics.png"><img src="assets/diagnostics.png" width="960" height="1280" loading="lazy" decoding="async" alt="상태·진단 창. 버전, 로컬 폴백 비밀번호, Google 재인증 계정, 자동 시작, 잠금 서비스, 원격 제어 연결, 업데이트 확인과 적용 대기 중인 업데이트가 줄마다 표시됩니다."></a>
+        <figcaption>상태·진단. 버전, 원격 연결, 자동 시작, 업데이트를 봅니다.</figcaption>
+      </figure>
+      <figure class="shot">
+        <a href="assets/reset-password.png"><img src="assets/reset-password.png" width="960" height="1280" loading="lazy" decoding="async" alt="비밀번호 재설정 창. 다른 기기의 브라우저에서 접속할 주소와 입력할 코드, 같은 내용의 QR 코드가 있습니다."></a>
+        <figcaption>비밀번호 재설정. Google 계정으로 본인을 확인합니다(QR).</figcaption>
+      </figure>
+      <figure class="shot">
+        <a href="assets/network-settings.png"><img src="assets/network-settings.png" width="960" height="1280" loading="lazy" decoding="async" alt="네트워크 설정 창. Wi-Fi 네트워크 목록과 비밀번호 입력란, 유선 랜 연결 상태가 있습니다."></a>
+        <figcaption>네트워크 설정. 잠긴 화면에서 Wi-Fi와 유선 랜에 연결합니다.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 요구 사항과 설치 -->
+  <section class="block wrap" id="install" aria-labelledby="install-title">
+    <header class="block-head block-head-plain">
+      <h2 id="install-title">설치</h2>
+    </header>
+    <div class="install-grid">
+      <div class="req">
+        <h3>실행 요구 사항</h3>
+        <ul class="dots-list">
+          <li>Windows 10/11 x64, 관리자 권한</li>
+          <li><a href="https://dotnet.microsoft.com/download/dotnet/8.0">.NET 8 런타임</a>(Microsoft.NETCore.App 8.0 이상)</li>
+          <li>WebView2 런타임. Windows 10/11에는 보통 설치돼 있고, 없으면 잠금 화면이 기본 모양으로 뜹니다.</li>
+        </ul>
+        <p class="note">디스크 암호화(BitLocker)와 자동 로그온을 먼저 설정해야 안전하게 쓸 수 있습니다.</p>
+      </div>
+      <div class="how">
+        <h3>설치 순서</h3>
+        <ol class="steps">
+          <li><a href="https://github.com/BlackBuddle/WinLocker-releases/releases/latest">최신 릴리스</a>에서 <code>WinLocker-win-x64.zip</code>과 <code>WinLocker-win-x64.zip.sha256</code>을 받습니다.</li>
+          <li>받은 zip이 손상되지 않았는지 확인합니다. 아래 값이 <code>.sha256</code> 파일 내용과 같아야 합니다.
+            <pre><code>(Get-FileHash .\WinLocker-win-x64.zip -Algorithm SHA256).Hash</code></pre></li>
+          <li>zip을 설치 폴더에 풉니다. 일반 사용자가 쓸 수 없는 폴더(예: <code>C:\Program Files\WinLocker</code>)를 권장합니다.</li>
+          <li>관리자 권한으로 <code>WinLocker.exe --install-autostart</code>를 실행해 로그온 때 자동으로 뜨게 합니다. 예전 버전에서 등록했다면 한 번 더 실행해야 새 작업 설정이 반영됩니다.</li>
+          <li>처음 실행하면 로컬 비밀번호와 Google 계정을 설정하는 창이 뜹니다.</li>
+        </ol>
+        <p class="more"><a href="https://github.com/BlackBuddle/WinLocker-releases#readme">README에서 설치 안내 전체 보기</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 알려진 한계 -->
+  <section class="block wrap" aria-labelledby="limits-title">
+    <header class="block-head block-head-plain">
+      <h2 id="limits-title">알려진 한계</h2>
+    </header>
+    <ul class="limits">
+      <li><b>Ctrl+Alt+Del은 막을 수 없습니다.</b><span>Windows가 보호하는 키라서 가로챌 수 없습니다.</span></li>
+      <li><b>업데이트로 교체하는 동안 약 1초 잠기지 않습니다.</b><span>자동 업데이트가 설치 폴더를 새 버전으로 바꾸고 WinLocker를 다시 띄우는 동안입니다.</span></li>
+      <li><b>비정상 종료되면 다음 로그온까지 다시 뜨지 않습니다.</b><span>그동안은 WinLocker의 잠금 화면과 차단이 동작하지 않습니다.</span></li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="foot wrap">
+  <div class="foot-in">
+    <p>© 2026 BlackBuddle. All rights reserved.</p>
+    <nav class="foot-nav" aria-label="저장소 링크">
+      <a href="https://github.com/BlackBuddle/WinLocker-releases/releases">릴리스 목록</a>
+      <a href="https://github.com/BlackBuddle/WinLocker-releases#readme">README</a>
+      <a href="https://github.com/BlackBuddle/WinLocker-releases/blob/main/LICENSE.txt">라이선스</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

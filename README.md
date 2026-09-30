@@ -3,6 +3,12 @@
 </p>
 
 <p align="center">
+  <a href="https://blackbuddle.github.io/WinLocker-releases/"><img src="images/intro-preview.png" alt="WinLocker 소개 페이지 첫 화면. 누르면 소개 페이지가 열립니다." width="520"></a><br>
+  <a href="https://blackbuddle.github.io/WinLocker-releases/"><b>소개 페이지 보기</b></a><br>
+  <sub>기능마다 움직이는 그림으로 설명합니다</sub>
+</p>
+
+<p align="center">
   <a href="https://github.com/BlackBuddle/WinLocker-releases/releases/latest"><img src="https://img.shields.io/github/v/release/BlackBuddle/WinLocker-releases?label=%EC%B5%9C%EC%8B%A0%20%EB%B2%84%EC%A0%84" alt="최신 버전"></a>
   <img src="https://img.shields.io/badge/Windows-10%20%7C%2011%20x64-2b2b2b" alt="Windows 10 | 11 x64">
   <img src="https://img.shields.io/badge/license-All%20rights%20reserved-lightgrey" alt="All rights reserved">
