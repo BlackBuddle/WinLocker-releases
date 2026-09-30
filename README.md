@@ -88,6 +88,16 @@ flowchart LR
 원격 인증은 별도 프로그램인 Remote Host가 맡고, WinLocker는 같은 PC 안에서 잠금·해제 신호만
 받습니다.
 
+## 용도
+
+WinLocker는 **PC 주인이 자기 PC에 직접 설치해 쓰는** 잠금 프로그램입니다.
+
+- 설치와 자동 시작 등록에는 관리자 권한이 필요합니다. 스스로 설치되거나 다른 PC로 옮겨 가는
+  기능은 없습니다.
+- 잠금은 폰 앱, 로컬 비밀번호, 본인 Google 계정 재인증 중 하나로 풀고, [제거](#제거) 순서대로
+  언제든 완전히 지울 수 있습니다.
+- 다른 사람이 쓰는 PC에는 그 사람의 동의 없이 설치하지 마세요.
+
 ## 실행 요구 사항
 
 - Windows 10/11 x64, 관리자 권한
@@ -119,11 +129,50 @@ flowchart LR
   다시 띄웁니다. 이 동안 약 1초 화면이 잠기지 않습니다.
 - 드라이브 루트(`C:\`)에 설치했거나 업데이터가 없는 설치본은 자동 업데이트를 하지 않습니다.
 
+## 설치하면 바뀌는 것
+
+| 바뀌는 것 | 언제 | 되돌리기 |
+|---|---|---|
+| 예약된 작업 `WinLocker` — 로그온 때 가장 높은 권한으로 실행 | `--install-autostart`를 실행할 때 | `--uninstall-autostart` |
+| 작업 관리자 차단 — `HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\System`의 `DisableTaskMgr` = 1 | 잠긴 동안 | 잠금을 풀면 값을 지웁니다 |
+| USB 저장장치 차단 — `HKLM\SYSTEM\CurrentControlSet\Services\USBSTOR`의 `Start` = 4 | 잠긴 동안 | 잠금을 풀면 3(Windows 기본값)으로 되돌립니다 |
+| 창 전환 단축키 차단 | 잠긴 동안 | 잠금을 풀면 풀립니다 |
+| 설정·기록 폴더 `%LOCALAPPDATA%\WinLocker` — 로컬 비밀번호 해시, Google 계정 설정, 로그, WebView2 데이터, 업데이트 기록과 임시 파일 | 처음 실행할 때부터 | 직접 지웁니다 |
+| 인터넷 연결 — GitHub(이 저장소의 업데이트 확인·내려받기), Google 인증 서버(Google 계정으로 비밀번호를 재설정할 때) | 해제할 때(최소 6시간 간격), 재설정할 때 | — |
+
+## 제거
+
+1. 잠금을 풉니다. 풀면 작업 관리자·USB 저장장치 차단이 원래대로 돌아갑니다.
+2. 관리자 권한 PowerShell에서 자동 시작 등록을 해제합니다. 설치 폴더가 다르면 경로를 바꿉니다.
+   ```powershell
+   & "C:\Program Files\WinLocker\WinLocker.exe" --uninstall-autostart
+   ```
+3. 트레이 아이콘을 우클릭해 **종료**를 누르고, 확인 창에서 **예**를 누릅니다.
+4. 설치 폴더(예: `C:\Program Files\WinLocker`)를 지웁니다.
+5. 설정·기록 폴더 `%LOCALAPPDATA%\WinLocker`를 지웁니다. 로컬 비밀번호 해시와 Google 계정 설정도
+   함께 지워집니다.
+6. `%TEMP%`에 `WinLockerUpdater-`로 시작하는 폴더가 남아 있으면 지웁니다.
+7. WinLocker 때문에 켠 자동 로그온은 끕니다. 켜 둔 채로 두면 PC가 잠금 없이 바로 열립니다.
+8. Remote Host는 별도 프로그램이라 따로 지웁니다.
+
+잠긴 채로 비정상 종료돼 작업 관리자나 USB 저장장치가 계속 막혀 있으면, WinLocker를 다시 실행해
+잠금을 풀면 돌아옵니다. WinLocker를 이미 지웠다면 WinLocker를 쓰던 계정에서 관리자 권한
+PowerShell을 열고 다음을 실행합니다.
+
+```powershell
+Remove-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\System' -Name DisableTaskMgr -ErrorAction SilentlyContinue
+Set-ItemProperty 'HKLM:\SYSTEM\CurrentControlSet\Services\USBSTOR' -Name Start -Value 3
+```
+
 ## 알려진 한계
 
 - Ctrl+Alt+Del은 Windows가 보호하는 키라 막을 수 없습니다.
 - 자동 업데이트로 교체하는 동안 약 1초 화면이 잠기지 않습니다.
 - WinLocker가 비정상 종료되면 다음 로그온까지 다시 뜨지 않습니다.
+
+## 보안 문제 신고
+
+잠금 우회 같은 보안 문제는 공개 이슈 대신 [`SECURITY.md`](SECURITY.md)에 적힌 방법으로 알려 주세요.
 
 ## 라이선스
 
