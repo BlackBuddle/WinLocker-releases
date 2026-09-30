@@ -1,29 +1,97 @@
+WinLocker 사용 허락 조건
 Copyright (c) 2026 BlackBuddle. All rights reserved.
 
-이 소프트웨어(WinLocker와 WinLockerUpdater — 소스 코드, 실행 파일, 문서, 이미지 포함)의
-모든 권리는 저작권자에게 있습니다. 저작권자의 사전 서면 허락 없이 이 소프트웨어의 전부
-또는 일부를 사용, 복제, 수정, 배포, 판매, 대여하거나, 이를 바탕으로 2차 저작물을 만들 수
-없습니다.
+이 소프트웨어(WinLocker와 WinLockerUpdater — 실행 파일, 소스 코드, 문서, 이미지 포함)의
+저작권은 저작권자에게 있으며, 저작권자는 아래 조건으로 사용을 허락합니다.
 
-이 소프트웨어는 "있는 그대로" 제공되며, 명시적이든 묵시적이든 어떠한 보증도 하지
-않습니다. 저작권자는 이 소프트웨어의 사용으로 생긴 어떠한 손해에도 책임을 지지 않습니다.
+1. 개인 사용
+   개인은 자신이 소유하거나 직접 관리하는 PC에 이 소프트웨어를 무료로 설치해 쓸 수
+   있습니다. 이 허락은 독점적이지 않으며 다른 사람에게 넘길 수 없습니다.
 
-이 소프트웨어에 들어 있는 제3자 구성 요소는 각자의 라이선스를 따릅니다
-(THIRD-PARTY-NOTICES.txt 참고).
+2. 사전 서면 허락이 필요한 일
+   다음은 저작권자의 사전 서면 허락 없이 할 수 없습니다. 허락 문의는
+   https://github.com/BlackBuddle/WinLocker-releases/issues 로 합니다.
+   - 업무용 사용: 회사·기관·단체·매장 등 조직이 소유하거나 관리하는 PC에 설치하거나,
+     조직을 위해 설치·운영하는 것
+   - 재배포: 이 소프트웨어를 다른 곳에 올리거나 나눠 주는 것(공식 배포처 링크를
+     알려 주는 것은 괜찮습니다)
+   - 수정, 역설계·디컴파일·디스어셈블(관련 법이 명시적으로 허용하는 범위는 제외),
+     2차 저작물 작성
+   - 판매, 대여, 유료 제공
+
+3. 공식 배포처
+   이 소프트웨어는 https://github.com/BlackBuddle/WinLocker-releases 의 Releases에서만
+   배포합니다. 이 조건은 그곳에서 배포한 모든 버전에 적용됩니다.
+
+4. 보증 없음
+   이 소프트웨어는 "있는 그대로" 무료로 제공되며, 명시적이든 묵시적이든 어떠한 보증도
+   하지 않습니다. 특히 모든 무단 접근이나 우회를 막는다고 보증하지 않습니다. 알려진
+   한계는 README의 "알려진 한계"에 적혀 있습니다. 이 소프트웨어는 디스크 암호화
+   (BitLocker) 같은 기본 보안 수단을 대신하지 않습니다.
+
+5. 책임의 제한
+   관련 법이 허용하는 최대 한도에서, 저작권자는 이 소프트웨어를 사용하거나 사용하지
+   못해 생긴 어떠한 손해에도 책임을 지지 않습니다. 여기에는 잠금 우회나 무단 접근,
+   데이터의 유출·손실, 기기나 다른 프로그램의 오작동 같은 보안상 사고로 생긴 손해가
+   포함됩니다. 다만 저작권자의 고의 또는 중대한 과실로 인한 책임은 그러하지 않습니다.
+
+6. 허락의 종료
+   위 조건을 어기면 사용 허락은 효력을 잃습니다.
+
+7. 제3자 구성 요소
+   이 소프트웨어에 들어 있는 제3자 구성 요소는 각자의 라이선스를 따릅니다
+   (THIRD-PARTY-NOTICES.txt 참고).
 
 ----------------------------------------------------------------------
 
+WinLocker License
 Copyright (c) 2026 BlackBuddle. All rights reserved.
 
-All rights to this software (WinLocker and WinLockerUpdater, including source
-code, binaries, documentation and images) are reserved by the copyright holder.
-No part of this software may be used, copied, modified, distributed, sold,
-rented, or used to create derivative works without the prior written
-permission of the copyright holder.
+This software (WinLocker and WinLockerUpdater, including binaries, source code,
+documentation and images) is owned by the copyright holder, who permits its use
+under the terms below.
 
-THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY DAMAGES
-ARISING FROM THE USE OF THIS SOFTWARE.
+1. Personal use
+   An individual may install and use this software free of charge on a PC that
+   the individual owns or directly controls. This permission is non-exclusive
+   and non-transferable.
 
-Third-party components included in this software are licensed under their own
-terms (see THIRD-PARTY-NOTICES.txt).
+2. Uses that require prior written permission
+   The following require the prior written permission of the copyright holder.
+   Requests go to https://github.com/BlackBuddle/WinLocker-releases/issues.
+   - Business use: installing the software on PCs owned or managed by a company,
+     institution, organization or store, or installing or operating it on behalf
+     of such an organization
+   - Redistribution: uploading or handing out copies of the software (sharing a
+     link to the official download location is allowed)
+   - Modification, reverse engineering, decompilation or disassembly (except to
+     the extent expressly permitted by applicable law), or creating derivative
+     works
+   - Selling, renting, or offering the software for a fee
+
+3. Official distribution
+   The software is distributed only through the Releases of
+   https://github.com/BlackBuddle/WinLocker-releases. These terms apply to every
+   version distributed there.
+
+4. No warranty
+   THIS SOFTWARE IS PROVIDED FREE OF CHARGE AND "AS IS", WITHOUT WARRANTY OF ANY
+   KIND, EXPRESS OR IMPLIED. IN PARTICULAR, IT IS NOT WARRANTED TO PREVENT ALL
+   UNAUTHORIZED ACCESS OR CIRCUMVENTION. Known limitations are listed under
+   "알려진 한계" (Known limitations) in the README. The software does not replace
+   basic security measures such as disk encryption (BitLocker).
+
+5. Limitation of liability
+   TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE COPYRIGHT HOLDER SHALL
+   NOT BE LIABLE FOR ANY DAMAGES ARISING FROM THE USE OF, OR INABILITY TO USE,
+   THIS SOFTWARE, INCLUDING DAMAGES FROM SECURITY INCIDENTS SUCH AS LOCK
+   CIRCUMVENTION, UNAUTHORIZED ACCESS, DATA LEAKAGE OR LOSS, OR MALFUNCTION OF
+   DEVICES OR OTHER SOFTWARE. THIS DOES NOT LIMIT LIABILITY FOR THE COPYRIGHT
+   HOLDER'S INTENTIONAL MISCONDUCT OR GROSS NEGLIGENCE.
+
+6. Termination
+   The permission granted here ends automatically if these terms are violated.
+
+7. Third-party components
+   Third-party components included in this software are licensed under their
+   own terms (see THIRD-PARTY-NOTICES.txt).

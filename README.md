@@ -11,7 +11,7 @@
 <p align="center">
   <a href="https://github.com/BlackBuddle/WinLocker-releases/releases/latest"><img src="https://img.shields.io/github/v/release/BlackBuddle/WinLocker-releases?label=%EC%B5%9C%EC%8B%A0%20%EB%B2%84%EC%A0%84" alt="최신 버전"></a>
   <img src="https://img.shields.io/badge/Windows-10%20%7C%2011%20x64-2b2b2b" alt="Windows 10 | 11 x64">
-  <img src="https://img.shields.io/badge/license-All%20rights%20reserved-lightgrey" alt="All rights reserved">
+  <img src="https://img.shields.io/badge/%EB%9D%BC%EC%9D%B4%EC%84%A0%EC%8A%A4-%EA%B0%9C%EC%9D%B8%20%EC%82%AC%EC%9A%A9%20%EB%AC%B4%EB%A3%8C-lightgrey" alt="라이선스: 개인 사용 무료">
 </p>
 
 <p align="center">
@@ -97,6 +97,8 @@ WinLocker는 **PC 주인이 자기 PC에 직접 설치해 쓰는** 잠금 프로
 - 잠금은 폰 앱, 로컬 비밀번호, 본인 Google 계정 재인증 중 하나로 풀고, [제거](#제거) 순서대로
   언제든 완전히 지울 수 있습니다.
 - 다른 사람이 쓰는 PC에는 그 사람의 동의 없이 설치하지 마세요.
+- 있는 그대로 무료로 제공하며, 모든 우회를 막는다고 보증하지 않습니다. 설치 전에
+  [알려진 한계](#알려진-한계)와 [라이선스](#라이선스)의 책임 제한을 읽어 주세요.
 
 ## 실행 요구 사항
 
@@ -176,9 +178,22 @@ Set-ItemProperty 'HKLM:\SYSTEM\CurrentControlSet\Services\USBSTOR' -Name Start -
 
 ## 라이선스
 
-© 2026 BlackBuddle. All rights reserved. 저작권자의 사전 서면 허락 없이 이 소프트웨어를 사용,
-복제, 수정, 배포할 수 없습니다. 전문은 [`LICENSE.txt`](LICENSE.txt)와 각 릴리스 zip 안의
-`LICENSE.txt`에 있습니다.
+**개인 사용은 무료입니다.** 자기 PC에 설치해 쓰는 데에는 따로 허락이 필요 없습니다. 다음은
+저작권자의 사전 서면 허락이 필요하며, 문의는 [Issues](https://github.com/BlackBuddle/WinLocker-releases/issues)로
+해 주세요.
+
+- 회사·기관·단체·매장 등 조직의 PC에 설치하는 업무용 사용
+- 재배포(공식 배포처 링크를 알려 주는 것은 괜찮습니다)
+- 수정, 역설계, 2차 저작물 작성
+- 판매, 대여, 유료 제공
+
+**책임 제한.** WinLocker는 있는 그대로 무료로 제공되며, 모든 무단 접근이나 우회를 막는다고
+보증하지 않습니다. 관련 법이 허용하는 한도에서, 잠금 우회·데이터 유출이나 손실 같은 보안상 사고를
+포함해 사용으로 생긴 손해에 책임지지 않습니다(저작권자의 고의·중대한 과실은 제외).
+
+전문은 [`LICENSE.txt`](LICENSE.txt)에 있고, 이 저장소에서 배포한 모든 버전에 적용됩니다. v1.0.0 zip
+안의 `LICENSE.txt`는 예전 문구이며, 이 저장소의 `LICENSE.txt`가 우선합니다.
+© 2026 BlackBuddle. All rights reserved.
 
 릴리스 zip에 들어 있는 제3자 구성 요소(Microsoft Edge WebView2 SDK)의 라이선스와 고지문은 zip 안의
 `THIRD-PARTY-NOTICES.txt`에 있습니다.
